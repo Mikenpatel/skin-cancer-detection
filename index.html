@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    
+    <title>Document</title>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script> 
+
+    
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Just+Another+Hand&display=swap'>
+    <link rel='stylesheet' href="{{url_for('static',filename='style.css')}}">
+    <style>
+        body {
+            font-family: 'Just Another Hand', cursive;
+            background-color: #242E6B;
+            width: 100%;
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
+        
+        
+        .btn {
+            margin: 10px;
+            background-color:#FFFFFF;
+            border-radius:20px;
+            border-width: 0;
+            cursor:pointer;
+            color:#242E6B;
+            line-height: 50px;
+            font-family:'Just Another Hand', cursive;
+            font-size:50px;
+            letter-spacing: 3px;
+            padding:13px 32px 0 32px;
+            margin-top:250px;
+            text-align: center;
+            text-decoration:none;
+            margin-top:20px
+            }
+        
+          h1{
+              font-size: 150px;
+              font-weight: 300;
+          }
+          #title{
+              color:#FC8C93;
+              line-height:50px;
+              margin-bottom: 20px;
+          }
+         .container {
+            text-align: center;
+            margin: 50px auto;
+            margin-bottom: 50px;
+            }
+        
+        .button-container{
+            text-align: center;
+            margin-top:20px;
+        
+        }
+        .can{
+           
+            margin:40px 40px;
+            padding:10px 10px;
+            border:solid white 2px;
+            background-color:black;
+        }
+        .button-container-2{
+            text-align: center;
+            margin-top:20px;
+        }
+        
+        
+    </style>
+    
+</head>
+<body>
+    <div class=container>
+         <h1 id="title">Skin Cancer Detection</h1>
+         <form action="/" method="POST" enctype="multipart/form-data">
+         <input type="file" hidden="hidden" id="realButton" name="file">
+         <input type = "submit" value="Upload" id="actualSubmitButton" hidden="hidden"> 
+        </form>
+    </div>
+
+    <div class="button-container">
+         
+         <img src="" alt="" id="myImg" height="300px" width="300px">
+         
+         
+        
+    </div>
+    <div class="button-container-2">
+        <button type="button" id="customButton" class="btn">Select Image</button>
+        <button type="button" id="predictButton" class="btn" hidden="hidden">Predict</button>
+        <button type="button" id="createdSubmitButton" class="btn" hidden="hidden">Submit</button>
+        <h1 id="title">{{result}}</h1>
+        <!-- <h3 id=title>{{path}}</h3> -->
+         
+    </div>
+    
+
+<script>
+    realBtn=document.querySelector('#realButton')
+    customBtn=document.querySelector('#customButton')
+    submitBtn=document.querySelector('#submitButton')
+
+    customBtn.addEventListener("click",function(){
+        
+        realBtn.click()
+ 
+    })
+     
+
+    $(function () {
+        $("#realButton").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+
+           
+        });
+       
+    });
+   
+    
+    function imageIsLoaded(e) {
+        $('#myImg').attr('src', e.target.result);
+        $("#customButton").hide()
+        $("#predictButton").hide()
+        $("#createdSubmitButton").show()
+
+    };
+
+    $("#predictButton").click(function(){
+        $("#predictButton").hide()
+        
+       
+    })
+   actualSubmitButton=document.querySelector('#actualSubmitButton')
+   createdSubmitButton=document.querySelector('#createdSubmitButton')
+   createdSubmitButton.addEventListener('click',function(){
+          actualSubmitButton.click((e)=>
+          {e.preventDefault()})
+
+         
+         
+   })
+   $("h3").show()
+
+   
+ 
+
+    
+</script>
+
+</body>
+
+
+</html>
